@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>To-Do List Advanced</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        input {
+            padding: 8px;
+            width: 200px;
+        }
+
+        button {
+            padding: 6px 10px;
+            margin-left: 5px;
+            cursor: pointer;
+        }
+
+        li {
+            list-style: none;
+            margin: 8px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>To-Do List</h2>
+
+    <input type="text" id="taskInput" placeholder="Enter task">
+    <button onclick="addTask()">Add Task</button>
+
+    <ul id="taskList"></ul>
+
+    <script>
+        let tasks = [];
+
+        function addTask() {
+            let task = document.getElementById("taskInput").value;
+
+            if (task !== "") {
+                tasks.push(task);
+                document.getElementById("taskInput").value = "";
+                displayTasks();
+            }
+        }
+
+        function deleteTask(index) {
+            tasks.splice(index, 1); // Remove specific task
+            displayTasks();
+        }
+
+        function displayTasks() {
+            let list = document.getElementById("taskList");
+            list.innerHTML = "";
+
+            for (let i = 0; i < tasks.length; i++) {
+                let li = document.createElement("li");
+
+                li.innerHTML = tasks[i] +
+                    " <button onclick='deleteTask(" + i + ")'>Delete</button>";
+
+                list.appendChild(li);
+            }
+        }
+    </script>
+
+</body>
+</html>
